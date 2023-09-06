@@ -5,9 +5,9 @@ class Admin extends Member
     protected static int $instances = 0;
     protected AdminLevels $level;
 
-    public function __construct(string $login, string $password, int $age, AdminLevels $level = AdminLevels::Admin)
+    public function __construct(string $name, string $login, string $password, int $age, AdminLevels $level = AdminLevels::Admin)
     {
-        parent::__construct($login, $password, $age);
+        parent::__construct($name, $login, $password, $age);
         $this->level = $level;
     }
 
