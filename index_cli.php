@@ -1,11 +1,14 @@
 <?php
 
 use App\Auth\AuthException;
+use App\DesignPatterns\Decorator\DecoratorBold;
+use App\DesignPatterns\Decorator\DecoratorItalic;
+use App\DesignPatterns\Decorator\Pen;
+use App\DesignPatterns\Factory\PenDecorators;
+use App\DesignPatterns\Factory\PenFactory;
 use App\User\Admin;
 use App\User\Enum\AdminLevels;
 use App\User\Member;
-use App\Vehicle\Car;
-use App\Blueprint\Car as BlueprintCar;
 
 require_once 'vendor/autoload.php';
 
@@ -38,3 +41,5 @@ echo $member::class."\n";
 echo $member."\n";
 //var_dump($member);
 
+$pen = PenFactory::create(PenDecorators::Bold, PenDecorators::Italic);
+echo $pen->write('Is it working?')."\n";

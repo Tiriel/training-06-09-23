@@ -12,6 +12,7 @@
         }
     ],
     "require": {
-        "twig/twig": "^3.7"
+        "twig/twig": "^3.7",
+        "psr/log": "^3.0"
     }
 }
