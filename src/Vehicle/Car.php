@@ -1,9 +1,9 @@
 <?php
 
-namespace Vehicle;
+namespace App\Vehicle;
 
 // A class is the pattern to build an object
-use Blueprint\Remote;
+use App\Blueprint\Remote;
 
 class Car // classname
 {

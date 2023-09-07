@@ -1,6 +1,7 @@
 <?php
 
-namespace User\Enum;
+namespace App\User\Enum;
+
 enum AdminLevels
 {
     case Admin;

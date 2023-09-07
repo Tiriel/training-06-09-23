@@ -1,6 +1,6 @@
 <?php
 
-namespace Vehicle;
+namespace App\Vehicle;
 
 class Wheel
 {

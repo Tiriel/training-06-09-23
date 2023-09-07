@@ -1,6 +1,6 @@
 <?php
 
-namespace Blueprint;
+namespace App\Blueprint;
 
 class Remote
 {
