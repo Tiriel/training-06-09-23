@@ -1,8 +1,11 @@
 <?php
 
+namespace User;
 abstract class User
 {
-    public function __construct(protected string $name) {}
+    public function __construct(protected string $name)
+    {
+    }
 
     public function getName(): string
     {

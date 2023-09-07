@@ -1,14 +1,19 @@
 <?php
 
+namespace User;
+
+use Auth\AuthException;
+use Auth\AuthInterface;
+
 class Member extends User implements AuthInterface
 {
     protected static int $instances = 0;
 
     public function __construct(
         string $name,
-        private string $login,
-        private string $password,
-        private int $age,
+        protected string $login,
+        protected string $password,
+        protected int $age,
     ) {
         parent::__construct($name);
         static::$instances++;

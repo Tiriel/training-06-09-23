@@ -1,5 +1,9 @@
 <?php
 
+namespace User;
+
+use User\Enum\AdminLevels;
+
 class Admin extends Member
 {
     protected static int $instances = 0;

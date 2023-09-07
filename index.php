@@ -1,11 +1,20 @@
 <?php
 
-require_once 'AdminLevels.php';
-require_once 'User.php';
-require_once 'AuthException.php';
-require_once 'AuthInterface.php';
-require_once 'Member.php';
-require_once 'Admin.php';
+use Auth\AuthException;
+use User\Admin;
+use User\Enum\AdminLevels;
+use User\Member;
+use Vehicle\Car;
+use Blueprint\Car as BlueprintCar;
+
+require_once 'User/Enum/AdminLevels.php';
+require_once 'User/User.php';
+require_once 'Auth/AuthException.php';
+require_once 'Auth/AuthInterface.php';
+require_once 'User/Member.php';
+require_once 'User/Admin.php';
+require_once 'Vehicle/Car.php';
+require_once 'Blueprint/Car.php';
 
 // $member is an object instance
 $member = new Admin('Benjamin', 'Ben', 'abcd1234', 36, AdminLevels::Admin);
@@ -35,3 +44,5 @@ try {
 echo $member::class."\n";
 echo $member."\n";
 //var_dump($member);
+
+$car = new Car();
