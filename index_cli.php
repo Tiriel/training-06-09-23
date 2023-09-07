@@ -38,4 +38,3 @@ echo $member::class."\n";
 echo $member."\n";
 //var_dump($member);
 
-$car = new Car();

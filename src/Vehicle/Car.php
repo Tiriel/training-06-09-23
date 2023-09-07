@@ -17,6 +17,13 @@ class Car // classname
 
     private array $wheels = [];
 
+    public function __construct(array $wheels)
+    {
+        if (\count($wheels) === 4 && $wheels[0] instanceof Wheel) {
+            $this->wheels = $wheels;
+        }
+    }
+
     public function open(Remote $remote): void
     {
         $remote->openCar($this);
