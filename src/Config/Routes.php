@@ -2,6 +2,7 @@
 
 namespace App\Config;
 
+use App\Controller\ContactController;
 use App\Controller\PostController;
 
 class Routes
@@ -12,7 +13,12 @@ class Routes
             'action' => 'index',
             'arguments' => [],
         ],
-        '/{slug}' => [
+        '/contact' => [
+            'controller' => ContactController::class,
+            'action' => 'contact',
+            'arguments' => [],
+        ],
+        '/post/{slug}' => [
             'controller' => PostController::class,
             'action' => 'get',
             'arguments' => ['slug' => '[a-z0-9-]+'],

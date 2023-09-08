@@ -2,11 +2,15 @@
 
 namespace App\Config;
 
+use App\Controller\ContactController;
 use App\Controller\PostController;
 use App\Model\Db\Connection;
 use App\Model\Db\Query;
 use App\Router;
+use App\View\Renderer;
 use Psr\Container\ContainerInterface;
+use Twig\Environment;
+use Twig\Loader\FilesystemLoader;
 
 class Services implements ContainerInterface
 {
@@ -15,7 +19,12 @@ class Services implements ContainerInterface
         Router::class => [Routes::class],
         Query::class => [Connection::class],
         Connection::class => [\PDO::class],
-        PostController::class => [],
+        \PDO::class => ['sqlite:'.__DIR__.'/../../db.sqlite'],
+        Renderer::class => [Environment::class],
+        Environment::class => [FilesystemLoader::class],
+        FilesystemLoader::class => [__DIR__.'/../../templates'],
+        PostController::class => [Renderer::class, Query::class],
+        ContactController::class => [Renderer::class, Query::class],
     ];
 
     public static function create(): self

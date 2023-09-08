@@ -12,10 +12,11 @@ class Router
     {
         foreach ($this->routes->get() as $route => $definition) {
             if (preg_match('/\{(\w+)\}/', $route, $matches)) {
-                $route = str_replace(sprintf("{%s}", $matches[1]), $definition['arguments'][$matches[1]], $route);
+                $regex = $definition['arguments'][$matches[1]];
+                $route = str_replace(sprintf("{%s}", $matches[1]), sprintf('(%s)', $regex), $route);
             }
 
-            if (preg_match("#$route#", $path, $args)) {
+            if (preg_match("#^$route$#", $path, $args)) {
                 $arguments = [];
                 if (isset($args[1])) {
                     $arguments[] = $args[1];

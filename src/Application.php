@@ -21,6 +21,7 @@ class Application
         // routing
         $router = $this->container->get(Router::class);
         [$controller, $action, $arguments] = $router->route($path);
+
         $controller = $this->container->get($controller);
 
         // Exécuter controller
