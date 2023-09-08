@@ -1,0 +1,71 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+'scale 400 height
+skinparam RoundCorner 0
+skinparam classFontColor 76d43e
+skinparam classBackgroundColor fff
+skinparam classFontStyle bold
+skinparam classAttributeIconSize 0
+skinparam ArrowColor 76d43e
+hide empty members
+
+circle index
+
+namespace App {
+    class Application {
+        + run(): string
+    }
+    class Router {
+        + route(string $path): iterable
+    }
+}
+
+namespace Controller {
+    abstract class Controller {
+        + __construct()
+    }
+    class PostController extends Controller {
+        + index(): string
+        + get(string $slug): string
+    }
+}
+
+namespace Model {
+    class Post {
+        # int id
+        # string title
+        # string slug
+        # string content
+        # DateTimeImmutable publishedAt
+        # string author
+        + getters()
+        + setter()
+    }
+    class Query {
+        + getOneBySlug(string $classname, string $slug): mixed
+        + getList(string $classname, int $limit, $int offset): iterable
+        + save(mixed $object): bool
+    }
+    class Connection {
+        + fetch(string $stmt, array $params = []): mixed
+        + execute(string $stmt, array $params = []): bool|int
+    }
+}
+
+namespace Vue {
+    class Twig\Environment {
+        + render()
+    }
+}
+
+index <-> Application
+Application <-> Router
+Application <-> PostController
+PostController --> Query
+Query <-> Connection
+Query --> Post
+Post --> PostController
+PostController <-> Twig\Environment
+
+@enduml
