@@ -13,7 +13,10 @@ class Connection
         $this->connection = new \PDO($dsn);
     }
 
-    private function __clone() {}
+    private function __clone()
+    {
+        throw new \RuntimeException('Singletons should not be cloned.');
+    }
 
     public static function getInstance(string $dsn = ''): static
     {

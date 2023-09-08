@@ -15,13 +15,17 @@ class Car // classname
     // a class may contain properties
     private string $brand = ''; // properties must have a visibility, may have a type, and default value
 
+    /**
+     * @var Wheel[]
+     */
     private array $wheels = [];
 
     public function __construct(array $wheels)
     {
-        if (\count($wheels) === 4 && $wheels[0] instanceof Wheel) {
-            $this->wheels = $wheels;
+        if (\count($wheels) !== 4 || !$wheels[0] instanceof Wheel) {
+            throw new \InvalidArgumentException();
         }
+        $this->wheels = $wheels;
     }
 
     public function open(Remote $remote): void
@@ -45,6 +49,11 @@ class Car // classname
         $this->brand = $brand;
 
         return $this;
+    }
+
+    public function getWheels(): array
+    {
+        return $this->wheels;
     }
 
     public function addWheel(Wheel $wheel): void
