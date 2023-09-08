@@ -8,6 +8,7 @@ skinparam classBackgroundColor fff
 skinparam classFontStyle bold
 skinparam classAttributeIconSize 0
 skinparam ArrowColor 76d43e
+skinparam linetype ortho
 hide empty members
 
 circle index
@@ -19,53 +20,65 @@ namespace App {
     class Router {
         + route(string $path): iterable
     }
+    class Container {}
+
+    namespace Controller {
+        abstract class Controller {
+            + __construct()
+        }
+        class PostController extends Controller {
+            + index(): string
+            + get(string $slug): string
+        }
+    }
+
+    namespace Model {
+        class Post {
+            # int id
+            # string title
+            # string slug
+            # string content
+            # DateTimeImmutable publishedAt
+            # string author
+            + getters()
+            + setter()
+        }
+        namespace Db {
+            class Query {
+                + getOneBySlug(string $classname, string $slug): mixed
+                + getList(string $classname, int $limit, $int offset): iterable
+                + save(mixed $object): bool
+            }
+            class Connection {
+                + fetch(string $stmt, array $params = []): mixed
+                + execute(string $stmt, array $params = []): bool|int
+            }
+        }
+    }
+    namespace Vue {
+        class Renderer {
+            + render()
+        }
+    }
 }
 
-namespace Controller {
-    abstract class Controller {
-        + __construct()
-    }
-    class PostController extends Controller {
-        + index(): string
-        + get(string $slug): string
-    }
-}
-
-namespace Model {
-    class Post {
-        # int id
-        # string title
-        # string slug
-        # string content
-        # DateTimeImmutable publishedAt
-        # string author
-        + getters()
-        + setter()
-    }
-    class Query {
-        + getOneBySlug(string $classname, string $slug): mixed
-        + getList(string $classname, int $limit, $int offset): iterable
-        + save(mixed $object): bool
-    }
-    class Connection {
-        + fetch(string $stmt, array $params = []): mixed
-        + execute(string $stmt, array $params = []): bool|int
-    }
-}
-
-namespace Vue {
-    class Twig\Environment {
-        + render()
+namespace Psr\Container {
+    interface ContainerInterface {
+        + get(string $id)
+        + has(string $id): bool
     }
 }
 
 index <-> Application
 Application <-> Router
+Application <-up-> Container
+Container .up.> ContainerInterface
 Application <-> PostController
 PostController --> Query
 Query <-> Connection
-Query --> Post
+Query -up-> Post
 Post --> PostController
-PostController <-> Twig\Environment
+PostController <-> Renderer
+Renderer --> Twig\Environment
 
 @enduml
